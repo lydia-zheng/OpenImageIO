@@ -432,7 +432,7 @@ jobs:
                             FREETYPE_VERSION=master
                             QT_VERSION=0 INSTALL_OPENCV=0
                             # The installed OpenVDB has a TLS conflict with Python 3.8
-                            # Disabling the `apt-get update` in gh-installdeps.bash 
+                            # Disabling the `apt-get update` in gh-installdeps.bash
                             # addresses a job killing problem in the GHA Ubuntu
                             # 24.04 runners that cropped up circa May 29 2024. Maybe
                             # it will be fixed and we can do the update again later?
