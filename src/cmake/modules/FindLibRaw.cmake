@@ -96,7 +96,12 @@ if (LINKSTATIC)
         set (LibRaw_r_LIBRARIES ${LibRaw_r_LIBRARIES} ${LCMS2_LIBRARIES})
     endif()
     if (MSVC)
+<<<<<<< HEAD
         set (LibRaw_r_DEFINITIONS ${LibRaw_r_DEFINITIONS} -D LIBRAW_NODLL)
         set (LibRaw_DEFINITIONS ${LibRaw_DEFINITIONS} -D LIBRAW_NODLL)
+=======
+        set (LibRaw_r_DEFINITIONS ${LibRaw_r_DEFINITIONS} LIBRAW_NODLL)
+        set (LibRaw_DEFINITIONS ${LibRaw_DEFINITIONS} LIBRAW_NODLL)
+>>>>>>> 976f9f887 (build: Partially revert #4193, the avoidance of add_blah wasn't necessary (#4273))
     endif()
 endif ()

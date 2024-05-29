@@ -170,6 +170,10 @@ message(STATUS "Joint namespace PROJ_NAMESPACE_V:       ${PROJ_NAMESPACE_V}")
 # defined for downstream projects using OIIO.
 add_compile_definitions (OIIO_INTERNAL=1)
 
+# Define OIIO_INTERNAL symbol only when building OIIO itself, will not be
+# defined for downstream projects using OIIO.
+add_compile_definitions (OIIO_INTERNAL=1)
+
 include (GNUInstallDirs)
 
 # Utilities for build instructions of the format-reading plugins
@@ -303,7 +307,7 @@ endif ()
 
 
 if (WIN32)
-    set (_py_dev_found Python3_Development_FOUND)    
+    set (_py_dev_found Python3_Development_FOUND)
 else ()
     set (_py_dev_found Python3_Development.Module_FOUND)
 endif ()
