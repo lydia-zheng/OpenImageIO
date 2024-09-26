@@ -437,6 +437,47 @@ def example_warp():
 
 # Section: Image Arithmetic
 
+def example_add():
+    print("example_add")
+    # BEGIN-imagebufalgo-add
+    # Add images A and B
+    A = ImageBuf("grid.exr")
+    B = ImageBuf("grid.exr")
+    Sum1 = ImageBufAlgo.add(A, B)
+
+    # Add 0.2 to channels 0-2, but not to channel 3
+    Sum2 = ImageBufAlgo.add(A, (0.2, 0.2, 0.2, 0.0))
+    # END-imagebufalgo-add
+    Sum2.write('add.exr', "half")
+
+
+def example_sub():
+    print("example_sub")
+    # BEGIN-imagebufalgo-sub
+    A = ImageBuf("grid.exr")
+    B = ImageBuf("grid.exr")
+    Diff = ImageBufAlgo.sub(A, B)
+    # END-imagebufalgo-sub
+    Diff.write("sub.exr", "half")
+
+def example_absdiff():
+    print("example_absdiff")
+    # BEGIN-imagebufalgo-absdiff
+    A = ImageBuf("grid.exr")
+    B = ImageBuf("grid.exr")
+    Diff = ImageBufAlgo.absdiff(A, B)
+    # END-imagebufalgo-absdiff
+    Diff.write("absdiff.exr", "half")
+
+def example_abs():
+    print("example_abs")
+    # BEGIN-imagebufalgo-abs
+    A = ImageBuf("grid.exr")
+    Abs = ImageBufAlgo.abs(A)
+    # END-imagebufalgo-abs
+    Abs.write("abs.exr", "half")
+
+#TODO: mul and onwards
 
 # Section: Image comparison and statistics
 
@@ -511,6 +552,10 @@ if __name__ == '__main__':
     example_warp()
 
     # Section: Image Arithmetic
+    example_add()
+    example_sub()
+    example_absdiff()
+    example_abs()
 
     # Section: Image comparison and statistics
 

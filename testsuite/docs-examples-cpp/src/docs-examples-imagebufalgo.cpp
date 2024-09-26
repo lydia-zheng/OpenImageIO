@@ -494,6 +494,54 @@ void example_warp()
 
 
 // Section: Image Arithmetic
+void example_add()
+{
+    print("example_add\n");
+    // BEGIN-imagebufalgo-add
+    // Add images A and B
+    ImageBuf A("grid.exr");
+    ImageBuf B("grid.exr");
+    ImageBuf Sum1 = ImageBufAlgo::add(A, B);
+
+    // Add 0.2 to channels 0-2, but not to channel 3
+    ImageBuf Sum2 = ImageBufAlgo::add(A, { 0.2f, 0.2f, 0.2f, 0.0f });
+    // END-imagebufalgo-add
+    Sum2.write("add.exr");
+}
+
+void example_sub()
+{
+    print("example_sub\n");
+    // BEGIN-imagebufalgo-sub
+    ImageBuf A("grid.exr");
+    ImageBuf B ("grid.exr");
+    ImageBuf Diff = ImageBufAlgo::sub(A, B);
+    // END-imagebufalgo-sub
+    Diff.write("sub.exr");
+}
+
+void example_absdiff()
+{
+    print("example_absdiff\n");
+    // BEGIN-imagebufalgo-absdiff
+    ImageBuf A("grid.exr");
+    ImageBuf B ("grid.exr");
+    Diff = ImageBufAlgo.absdiff(A, B);
+    // END-imagebufalgo-absdiff
+    Diff.write("absdiff.exr");
+}
+
+void example_abs()
+{
+    print("example_abs\n");
+    // BEGIN-imagebufalgo-abs
+    ImageBuf A("grid.exr");
+    ImageBuf Abs = ImageBufAlgo::abs(A);
+    // END-imagebufalgo-abs
+    Abs.write("abs.exr");
+}
+
+//TODO: mul and onwards
 
 
 // Section: Image comparison and statistics
@@ -572,6 +620,10 @@ int main(int /*argc*/, char** /*argv*/)
     example_warp();
 
     // Section: Image Arithmetic
+    example_add();
+    example_sub();
+    example_absdiff();
+    example_abs();
 
     // Section: Image comparison and statistics
 
