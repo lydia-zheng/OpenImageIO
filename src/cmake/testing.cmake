@@ -210,7 +210,7 @@ macro (oiio_add_all_tests)
         oiio_add_tests (
             docs-examples-python
             python-colorconfig
-            python-deep 
+            python-deep
             python-imagebuf
             python-imagecache
             python-imageoutput
