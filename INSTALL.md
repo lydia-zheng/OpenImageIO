@@ -85,8 +85,8 @@ Our build system is based upon 'CMake'.  If you don't already have it
 installed on your system, you can get it from http://www.cmake.org
 
 If certain dependencies (robin-map and fmtlib) are not found, their sources
-will be retrieved and built into libraries, as part of the build process. The 
-sources of those dependencies are cloned from their Git repo, hence `git` must 
+will be retrieved and built into libraries, as part of the build process. The
+sources of those dependencies are cloned from their Git repo, hence `git` must
 be available as a command.
 
 After you build OpenImageIO, if you compiled with the `EMBEDPLUGINS=0` flag
@@ -106,7 +106,7 @@ build options), maybe one of these packages managers will do it for you:
     * https://github.com/Microsoft/vcpkg/tree/master/ports/openimageio
     * `vcpkg install openimageio [tools]`
     * For a full list of supported build features: `vcpkg search openimageio`
-    * Instructions for building a Python wheel on Windows: 
+    * Instructions for building a Python wheel on Windows:
       https://github.com/Correct-Syntax/py-oiio
 * homebrew (https://github.com/Homebrew/brew)
     * https://formulae.brew.sh/formula/openimageio
@@ -363,8 +363,8 @@ produce a dynamic-linked version.
 
 As of OpenImageIO 3.0.3.0, the default DLL-loading behavior for Python 3.8+ has changed.
 
-If you've built OIIO from source and ``import OpenImageIO`` is throwing a ModuleNotFound exception, revert to the legacy DLL-loading behavior by setting environment variable 
-``OPENIMAGEIO_PYTHON_LOAD_DLLS_FROM_PATH=1``. 
+If you've built OIIO from source and ``import OpenImageIO`` is throwing a ModuleNotFound exception, revert to the legacy DLL-loading behavior by setting environment variable
+``OPENIMAGEIO_PYTHON_LOAD_DLLS_FROM_PATH=1``.
 
 
 
@@ -383,8 +383,8 @@ If you have a C++ compiler installed, you can also use the Python build-backend 
 from source by navigating to the root of the repository and running: ```pip install .```
 
 This will download and install CMake and Ninja if necessary, and invoke the CMake build system; which,
-in turn, will build missing dependencies, compile OIIO, and install the Python module, the libraries, 
-the headers, and the CLI tools to a platform-specific, Python-specific location. 
+in turn, will build missing dependencies, compile OIIO, and install the Python module, the libraries,
+the headers, and the CLI tools to a platform-specific, Python-specific location.
 
 See the [scikit-build-core docs](https://scikit-build-core.readthedocs.io/en/latest/configuration.html#configuring-cmake-arguments-and-defines)
 for more information on customizing and overriding build-tool options and CMake arguments.
