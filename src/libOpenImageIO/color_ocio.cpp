@@ -39,9 +39,15 @@ static const Imath::C3f test_colors[n_test_colors]
 }  // namespace
 
 
+<<<<<<< HEAD
 #if 1 || !defined(NDEBUG) /* allow color configuration debugging */
 static bool colordebug = Strutil::stoi(Sysutil::getenv("OIIO_DEBUG_COLOR"))
                          || Strutil::stoi(Sysutil::getenv("OIIO_DEBUG_ALL"));
+=======
+#if 0 || !defined(NDEBUG) /* allow color configuration debugging */
+static bool colordebug = Strutil::stoi(Sysutil::getenv("OIIO_DEBUG_COLOR"))
+                       || Strutil::stoi(Sysutil::getenv("OIIO_DEBUG_ALL"));
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #    define DBG(...)    \
         if (colordebug) \
         Strutil::print(__VA_ARGS__)
@@ -109,10 +115,17 @@ public:
     {
         return std::tie(a.hash, a.inputColorSpace, a.outputColorSpace,
                         a.context_key, a.context_value, a.looks, a.display,
+<<<<<<< HEAD
                         a.view, a.file, a.namedtransform, a.inverse)
                == std::tie(b.hash, b.inputColorSpace, b.outputColorSpace,
                            b.context_key, b.context_value, b.looks, b.display,
                            b.view, b.file, b.namedtransform, b.inverse);
+=======
+                        a.view, a.file, a.inverse)
+               == std::tie(b.hash, b.inputColorSpace, b.outputColorSpace,
+                           b.context_key, b.context_value, b.looks, b.display,
+                           b.view, b.file, b.inverse);
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     }
     ustring inputColorSpace;
     ustring outputColorSpace;

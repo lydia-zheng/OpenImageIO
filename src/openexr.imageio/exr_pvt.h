@@ -24,8 +24,11 @@
     (OPENEXR_VERSION_MAJOR * 10000 + OPENEXR_VERSION_MINOR * 100 \
      + OPENEXR_VERSION_PATCH)
 
+<<<<<<< HEAD
 #define OPENEXR_HAS_FLOATVECTOR 1
 
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #define ENABLE_EXR_DEBUG_PRINTS 0
 
 OIIO_PLUGIN_NAMESPACE_BEGIN
@@ -39,12 +42,26 @@ static bool exrdebug = Strutil::stoi(Sysutil::getenv("OIIO_DEBUG_OPENEXR"))
 #    define DBGEXR(...) \
         if (exrdebug)   \
         Strutil::print(__VA_ARGS__)
+<<<<<<< HEAD
+=======
 #else
 #    define DBGEXR(...)
 #endif
 
 
+
+#if OIIO_CPLUSPLUS_VERSION >= 17 || defined(__cpp_lib_gcd_lcm)
+using std::gcd;
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
+#else
+#    define DBGEXR(...)
+#endif
+
+
+<<<<<<< HEAD
 namespace pvt {
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 // Split a full channel name into layer and suffix.
 void

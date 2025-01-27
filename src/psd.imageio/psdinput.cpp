@@ -2276,8 +2276,13 @@ PSDInput::decompress_packbits(const char* src, char* dst,
 
     if (!bigendian()) {
         switch (m_header.depth) {
+<<<<<<< HEAD
         case 16: swap_endian((uint16_t*)dst_start, m_spec.width); break;
         case 32: swap_endian((uint32_t*)dst_start, m_spec.width); break;
+=======
+        case 16: swap_endian((uint16_t*)dst, m_spec.width); break;
+        case 32: swap_endian((uint32_t*)dst, m_spec.width); break;
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         }
     }
 

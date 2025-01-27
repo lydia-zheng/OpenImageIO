@@ -6,8 +6,12 @@ if (LIBRAW_FOUND)
     add_oiio_plugin (rawinput.cpp
                      INCLUDE_DIRS ${LibRaw_INCLUDE_DIR}
                      LINK_LIBRARIES ${LibRaw_r_LIBRARIES}
+<<<<<<< HEAD
                      COMPILE_OPTIONS ${LibRaw_r_DEFINITIONS}
                      DEFINITIONS "USE_LIBRAW=1")
+=======
+                     DEFINITIONS "USE_LIBRAW=1" ${LibRaw_r_DEFINITIONS})
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 else ()
     message (WARNING "Raw plugin will not be built")
 endif ()

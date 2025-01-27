@@ -300,7 +300,11 @@ public:
 
     /// Create a TextureOptBatch with all fields initialized to reasonable
     /// defaults.
+<<<<<<< HEAD
     TextureOptBatch_current() {
+=======
+    TextureOptBatch () {
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         *((simd_t*)&sblur) = simd_t::Zero();
         *((simd_t*)&tblur) = simd_t::Zero();
         *((simd_t*)&rblur) = simd_t::Zero();

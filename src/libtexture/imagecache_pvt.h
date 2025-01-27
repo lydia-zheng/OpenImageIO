@@ -12,6 +12,11 @@
 
 #include <tsl/robin_map.h>
 
+<<<<<<< HEAD
+=======
+#include <boost/thread/tss.hpp>
+
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #include <OpenImageIO/Imath.h>
 #include <OpenImageIO/export.h>
 #include <OpenImageIO/hash.h>

@@ -149,12 +149,16 @@ Oiiotool::express_parse_atom(const string_view expr, string_view& s,
             return false;
 
     } else if (Strutil::starts_with(s, "TOP")
+<<<<<<< HEAD
                || Strutil::starts_with(s, "BOTTOM")
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
                || Strutil::starts_with(s, "IMG[")) {
         // metadata substitution
         ImageRecRef img;
         if (Strutil::parse_prefix(s, "TOP")) {
             img = curimg;
+<<<<<<< HEAD
         } else if (Strutil::parse_prefix(s, "BOTTOM")) {
             img = (image_stack.size() <= 1) ? curimg : image_stack[0];
         } else if (Strutil::parse_prefix(s, "IMG[")) {
@@ -207,12 +211,36 @@ Oiiotool::express_parse_atom(const string_view expr, string_view& s,
             }
         }
         if (!img || img->has_error()) {
+=======
+        } else if (Strutil::parse_prefix(s, "IMG[")) {
+            int index = -1;
+            if (Strutil::parse_int(s, index) && Strutil::parse_char(s, ']')
+                && index >= 0 && index <= (int)image_stack.size()) {
+                if (index == 0)
+                    img = curimg;
+                else
+                    img = image_stack[image_stack.size() - index];
+            } else {
+                string_view name = Strutil::parse_until(s, "]");
+                auto found       = image_labels.find(name);
+                if (found != image_labels.end())
+                    img = found->second;
+                else
+                    img = ImageRecRef(new ImageRec(name, imagecache));
+                Strutil::parse_char(s, ']');
+            }
+        }
+        if (!img.get()) {
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             express_error(expr, s, "not a valid image");
             result = orig;
             return false;
         }
+<<<<<<< HEAD
         OIIO_ASSERT(img);
         img->read();
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         bool using_bracket = false;
         if (Strutil::parse_char(s, '[')) {
             using_bracket = true;
@@ -317,6 +345,7 @@ Oiiotool::express_parse_atom(const string_view expr, string_view& s,
                 result = out.str();
                 if (result.size() && result.back() == '\n')
                     result.pop_back();
+<<<<<<< HEAD
             } else if (metadata == "IS_CONSTANT") {
                 std::vector<float> color((*img)(0, 0).nchannels());
                 if (ImageBufAlgo::isConstantColor((*img)(0,0), color)) {
@@ -346,6 +375,8 @@ Oiiotool::express_parse_atom(const string_view expr, string_view& s,
                     result = "0";
                 }
 
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             } else if (using_bracket) {
                 // For the TOP[meta] syntax, if the metadata doesn't exist,
                 // return the empty string, and do not make an error.

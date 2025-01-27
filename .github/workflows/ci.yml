@@ -157,6 +157,8 @@ jobs:
       PYBIND11_VERSION: ${{matrix.pybind11_ver}}
       PYTHON_VERSION: ${{matrix.python_ver}}
       ABI_CHECK: ${{matrix.abi_check}}
+      ACTIONS_RUNNER_FORCE_ACTIONS_NODE_VERSION: node16
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       # Install nodejs 20 with glibc 2.17, to work around the face that the
       # GHA runners are insisting on a node version that is too new for the
@@ -406,7 +408,13 @@ jobs:
                             WEBP_VERSION=v1.5.0
                             FREETYPE_VERSION=VER-2-13-3
                             USE_OPENVDB=0
+<<<<<<< HEAD
           - desc: bleeding edge gcc14 C++20 py3.12 OCIO/libtiff/exr-main avx2
+=======
+                            WEBP_VERSION=v1.3.0
+                            # The installed OpenVDB has a TLS conflict with Python 3.8
+          - desc: bleeding edge gcc14 C++20 py3.12 OCIO/libtiff/exr-master boost1.74 avx2
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             nametag: linux-bleeding-edge
             runner: ubuntu-24.04
             cc_compiler: gcc-14
@@ -425,12 +433,20 @@ jobs:
                             PTEX_VERSION=main
                             PUGIXML_VERSION=master
                             WEBP_VERSION=main
+<<<<<<< HEAD
                             OIIO_CMAKE_FLAGS="-DOIIO_HARDENING=2"
                             EXTRA_DEP_PACKAGES="python3.12-dev python3-numpy"
                             USE_OPENVDB=0
                             SKIP_APT_GET_UPDATE=1
                             FREETYPE_VERSION=master
                             QT_VERSION=0 INSTALL_OPENCV=0
+=======
+                            OIIO_CMAKE_FLAGS="-DFORTIFY_SOURCE=2"
+                            QT_VERSION=6
+                            EXTRA_DEP_PACKAGES="python3.12-dev python3-numpy"
+                            PIP_INSTALLS="none"
+                            USE_OPENVDB=0
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
                             # The installed OpenVDB has a TLS conflict with Python 3.8
                             # Disabling the `apt-get update` in gh-installdeps.bash
                             # addresses a job killing problem in the GHA Ubuntu
@@ -491,6 +507,7 @@ jobs:
             depcmds: |
               sudo rm -rf /usr/local/include/OpenEXR
               sudo rm -rf /usr/local/lib64/cmake/{IlmBase,OpenEXR}
+<<<<<<< HEAD
 
 
   #
@@ -526,11 +543,93 @@ jobs:
       ctest_test_timeout: ${{ matrix.ctest_test_timeout || '800' }}
       coverage: ${{ matrix.coverage || 0 }}
       sonar: ${{ matrix.sonar || 0 }}
+=======
+          # Test formatting. This test entry doesn't do a full build, it
+          # just runs clang-format on everything, and passes if nothing is
+          # misformatted. Upon failure, the build artifact will be the full
+          # source code with the formatting fixed (diffs will also appear in
+          # the console output).
+          - desc: "clang-format"
+            nametag: clang-format
+            runner: ubuntu-latest
+            cxx_std: 17
+            extra_artifacts: "src/*.*"
+            python_ver: "3.10"
+            skip_tests: 1
+            setenvs: export BUILDTARGET=clang-format
+                            OIIO_CMAKE_FLAGS=-DUSE_PYTHON=0
+                            LLVM_VERSION=17.0.6 LLVM_DISTRO_NAME=ubuntu-22.04
+                            SKIP_SYSTEM_DEPS_INSTALL=1 QT_VERSION=0
+
+    runs-on: ${{ matrix.runner }}
+    env:
+      CXX: ${{matrix.cxx_compiler}}
+      CC: ${{matrix.cc_compiler}}
+      CMAKE_CXX_STANDARD: ${{matrix.cxx_std}}
+      USE_SIMD: ${{matrix.simd}}
+      FMT_VERSION: ${{matrix.fmt_ver}}
+      OPENEXR_VERSION: ${{matrix.openexr_ver}}
+      PYBIND11_VERSION: ${{matrix.pybind11_ver}}
+      PYTHON_VERSION: ${{matrix.python_ver}}
+    steps:
+      # We would like to use harden-runner, but it flags too many false
+      # positives, every time we download a dependency. We should use it only
+      # on CI runs where we are producing artifacts that users might rely on.
+      # - name: Harden Runner
+      #   uses: step-security/harden-runner@248ae51c2e8cc9622ecf50685c8bf7150c6e8813 # v1.4.3
+      #   with:
+      #     egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Prepare ccache timestamp
+        id: ccache_cache_keys
+        run: echo "date=`date -u +'%Y-%m-%dT%H:%M:%SZ'`" >> $GITHUB_OUTPUT
+      - name: ccache
+        id: ccache
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+        with:
+          path: /tmp/ccache
+          key: ${{github.job}}-${{matrix.nametag}}-${{ steps.ccache_cache_keys.outputs.date }}
+          restore-keys: ${{github.job}}-
+          save-always: true
+      - name: Build setup
+        run: |
+            ${{matrix.setenvs}}
+            src/build-scripts/ci-startup.bash
+      - name: Dependencies
+        run: |
+            ${{matrix.depcmds}}
+            src/build-scripts/gh-installdeps.bash
+      - name: Build
+        run: src/build-scripts/ci-build.bash
+      - name: Testsuite
+        if: matrix.skip_tests != '1'
+        run: src/build-scripts/ci-test.bash
+      - uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
+        if: failure()
+        with:
+          name: oiio-${{github.job}}-${{matrix.nametag}}
+          path: |
+            build/cmake-save
+            build/testsuite/*/*.*
+            ${{ matrix.extra_artifacts }}
+            !build/testsuite/oiio-images
+            !build/testsuite/openexr-images
+            !build/testsuite/fits-images
+            !build/testsuite/j2kp4files_v1_5
+
+
+  macos:
+    name: "${{matrix.runner}} appleclang${{matrix.aclang}}/C++${{matrix.cxx_std}} py${{matrix.python_ver}} ${{matrix.desc}}"
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     strategy:
       fail-fast: false
       matrix:
         include:
+<<<<<<< HEAD
           - desc: MacOS-13-Intel aclang14/C++17/py3.11
+=======
+          - desc: MacOS-13-Intel
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             runner: macos-13
             nametag: macos13-py311
             cc_compiler: clang
@@ -538,6 +637,7 @@ jobs:
             cxx_std: 17
             python_ver: "3.11"
             simd: sse4.2,avx2
+<<<<<<< HEAD
             ctest_test_timeout: 1200
             setenvs: export MACOSX_DEPLOYMENT_TARGET=12.0
           - desc: MacOS-14-ARM aclang15/C++20/py3.12
@@ -548,12 +648,74 @@ jobs:
             cxx_std: 20
             python_ver: "3.12"
           - desc: MacOS-15-ARM aclang16/C++20/py3.13
+=======
+            setenvs: export MACOSX_DEPLOYMENT_TARGET=12.0
+          - desc: MacOS-14-ARM
+            runner: macos-14
+            nametag: macos14-arm-py311
+            cc_compiler: clang
+            cxx_compiler: clang++
+            cxx_std: 20
+            python_ver: "3.11"
+            aclang: 15
+          - desc: MacOS-15-ARM
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             runner: macos-15
             nametag: macos15-arm-py313
             cc_compiler: clang
             cxx_compiler: clang++
             cxx_std: 20
             python_ver: "3.13"
+<<<<<<< HEAD
+=======
+            aclang: 16
+    runs-on: ${{ matrix.runner }}
+    env:
+      CXX: ${{matrix.cxx_compiler}}
+      CC: ${{matrix.cc_compiler}}
+      CMAKE_CXX_STANDARD: ${{ matrix.cxx_std }}
+      PYTHON_VERSION: ${{ matrix.python_ver }}
+      USE_SIMD: ${{matrix.simd}}
+      CTEST_TEST_TIMEOUT: 600
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Prepare ccache timestamp
+        id: ccache_cache_keys
+        run: echo "date=`date -u +'%Y-%m-%dT%H:%M:%SZ'`" >> $GITHUB_OUTPUT
+      - name: ccache
+        id: ccache
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+        with:
+          path: /Users/runner/.ccache
+          key: ${{github.job}}-${{matrix.nametag}}-${{ steps.ccache_cache_keys.outputs.date }}
+          restore-keys: ${{github.job}}-
+          save-always: true
+      - name: Build setup
+        run: |
+            ${{matrix.setenvs}}
+            src/build-scripts/ci-startup.bash
+      - name: Dependencies
+        run: |
+            src/build-scripts/install_homebrew_deps.bash
+            ${{matrix.depcmds}}
+      - name: Build
+        run: |
+            export PYTHONPATH=/usr/local/lib/python${PYTHON_VERSION}/site-packages:$PYTHONPATH
+            src/build-scripts/ci-build.bash
+      - name: Testsuite
+        run: src/build-scripts/ci-test.bash
+      - uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4.3.0
+        if: failure()
+        with:
+          name: oiio-${{github.job}}-${{matrix.nametag}}
+          path: |
+            build/cmake-save
+            build/testsuite/*/*.*
+            !build/testsuite/oiio-images
+            !build/testsuite/openexr-images
+            !build/testsuite/fits-images
+            !build/testsuite/j2kp4files_v1_5
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 
   #

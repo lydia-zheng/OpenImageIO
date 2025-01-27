@@ -450,9 +450,27 @@ GIFInput::seek_subimage(int subimage, int miplevel)
 void
 GIFInput::report_last_error(void)
 {
+<<<<<<< HEAD
     // GIFLIB_MAJOR >= 5 looks properly thread-safe, in that the error is
     // guaranteed to be specific to this open file.
     errorfmt("{}", GifErrorString(m_gif_file->Error));
+=======
+    // N.B. Only GIFLIB_MAJOR >= 5 looks properly thread-safe, in that the
+    // error is guaranteed to be specific to this open file.  We use a  spin
+    // mutex to prevent a thread clash for older versions, but it still
+    // appears to be a global call, so we can't be absolutely sure that the
+    // error was for *this* file.  So if you're using giflib prior to
+    // version 5, beware.
+#if GIFLIB_MAJOR >= 5
+    errorfmt("{}", GifErrorString(m_gif_file->Error));
+#elif GIFLIB_MAJOR == 4 && GIFLIB_MINOR >= 2
+    spin_lock lock(gif_error_mutex);
+    errorfmt("{}", GifErrorString());
+#else
+    spin_lock lock(gif_error_mutex);
+    errorfmt("GIF error {}", GifLastError());
+#endif
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 }
 
 

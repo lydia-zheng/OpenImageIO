@@ -805,6 +805,7 @@ Reading ../oiio-images/psd/psd_rgba_8.psd
     stEvt:instanceID: "xmp.iid:037A91A22BCDE011A998CBE7B5CCEB92; xmp.iid:2793235262CFE011B8B8C52D9599FB9E"
     stEvt:softwareAgent: "Adobe Photoshop CS5.1 Windows"
     stEvt:when: "2011-08-22T22:07:44-04:00; 2011-08-25T17:39:28-04:00"
+<<<<<<< HEAD
 Reading ../oiio-images/psd/psd_rgb_16_rle.psd
 ../oiio-images/psd/psd_rgb_16_rle.psd : 3840 x 2160, 3 channel, uint16 psd
     SHA-1: CF2071CFD7AF69ECEFC9EA00DC0EA7F8ED6A2E2B
@@ -835,6 +836,8 @@ Reading ../oiio-images/psd/psd_rgb_16_rle.psd
     stEvt:instanceID: "xmp.iid:9de7a004-9188-384a-a78b-5202a1f8a5ae"
     stEvt:softwareAgent: "Adobe Photoshop 26.0 (Windows)"
     stEvt:when: "2025-01-10T23:27:45+02:00"
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 Reading ../oiio-images/psd/psd_123.psd
 ../oiio-images/psd/psd_123.psd :  257 x  126, 4 channel, uint8 psd
     4 subimages: 257x126 [u8,u8,u8,u8], 33x98 [u8,u8,u8,u8], 63x100 [u8,u8,u8,u8], 61x102 [u8,u8,u8,u8]

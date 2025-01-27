@@ -16,6 +16,7 @@ NEW or CHANGED MINIMUM dependencies since the last major release are **bold**.
 
  * **C++17 or higher** (also builds with C++20)
      * The default build mode is C++17. This can be controlled by via the
+<<<<<<< HEAD
        CMake configuration flag: `-DCMAKE_CXX_STANDARD=20`, etc.
  * Compilers: **gcc 9.3** - 14.2, **clang 5** - 19, MSVS 2017 - 2019 (**v19.14
    and up**), **Intel icc 19+**, Intel OneAPI C++ compiler 2022+.
@@ -24,6 +25,16 @@ NEW or CHANGED MINIMUM dependencies since the last major release are **bold**.
  * **OpenEXR >= 3.1** (tested through 3.3 and main)
  * **libTIFF >= 4.0** (tested through 4.7)
  * **OpenColorIO >= 2.2** (tested through 2.4 and main)
+=======
+       CMake configuration flag: `-DCMAKE_CXX_STANDARD=14`, etc.
+     * ADVISORY: We expect that OIIO 2.6 in 2024 will require C++17 or higher.
+ * Compilers: gcc 6.1 - 14.1, clang 3.4 - 18, MSVS 2017 - 2019,
+   Intel icc 17+, Intel OneAPI C++ compiler 2022+.
+ * **CMake >= 3.15** (tested through 3.28)
+ * **OpenEXR/Imath >= 2.4** (recommended: 3.1 or higher; tested through 3.2
+   and main) (ADVISORY: We expect that OIIO 2.6 in 2024 will require OpenEXR >= 3.1)
+ * libTIFF >= 3.9 (recommended: 4.0+; tested through 4.6)
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
  * libjpeg >= 8 (tested through jpeg9e), or **libjpeg-turbo >= 2.1** (tested
    through 3.0)
  * **[fmtlib](https://github.com/fmtlib/fmt) >= 7.0** (tested through 11.1).
@@ -36,8 +47,14 @@ NEW or CHANGED MINIMUM dependencies since the last major release are **bold**.
      * Qt5 >= 5.6 (tested through 5.15) or Qt6 (tested through 6.7)
      * OpenGL
  * If you are building the Python bindings or running the testsuite:
+<<<<<<< HEAD
      * **Python >= 3.7** (tested through 3.13)
      * **pybind11 >= 2.7** (tested through 2.12)
+=======
+     * Python >= 2.7 (tested against 2.7, 3.7, 3.8, 3.9, 3.10, 3.11, 3.12)
+     * pybind11 >= 2.4.2 (Tested through 2.11. Note that pybind11 v2.10+ does
+       not support Python < 3.6.)
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
      * NumPy
  * If you want support for PNG files:
      * **libPNG >= 1.6.0** (tested though 1.6.43)

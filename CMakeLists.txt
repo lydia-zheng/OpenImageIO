@@ -174,6 +174,10 @@ add_compile_definitions (OIIO_INTERNAL=1)
 # defined for downstream projects using OIIO.
 add_compile_definitions (OIIO_INTERNAL=1)
 
+# Define OIIO_INTERNAL symbol only when building OIIO itself, will not be
+# defined for downstream projects using OIIO.
+add_compile_definitions (OIIO_INTERNAL=1)
+
 include (GNUInstallDirs)
 
 # Utilities for build instructions of the format-reading plugins

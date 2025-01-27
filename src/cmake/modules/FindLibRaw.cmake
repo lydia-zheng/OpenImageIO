@@ -97,11 +97,16 @@ if (LINKSTATIC)
     endif()
     if (MSVC)
 <<<<<<< HEAD
+<<<<<<< HEAD
         set (LibRaw_r_DEFINITIONS ${LibRaw_r_DEFINITIONS} -D LIBRAW_NODLL)
         set (LibRaw_DEFINITIONS ${LibRaw_DEFINITIONS} -D LIBRAW_NODLL)
 =======
         set (LibRaw_r_DEFINITIONS ${LibRaw_r_DEFINITIONS} LIBRAW_NODLL)
         set (LibRaw_DEFINITIONS ${LibRaw_DEFINITIONS} LIBRAW_NODLL)
 >>>>>>> 976f9f887 (build: Partially revert #4193, the avoidance of add_blah wasn't necessary (#4273))
+=======
+        set (LibRaw_r_DEFINITIONS ${LibRaw_r_DEFINITIONS} LIBRAW_NODLL)
+        set (LibRaw_DEFINITIONS ${LibRaw_DEFINITIONS} LIBRAW_NODLL)
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     endif()
 endif ()

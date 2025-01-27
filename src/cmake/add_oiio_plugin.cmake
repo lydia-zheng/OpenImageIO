@@ -12,7 +12,10 @@
 #                   [ SRC source1 ... ]
 #                   [ INCLUDE_DIRS include_dir1 ... ]
 #                   [ LINK_LIBRARIES external_lib1 ... ]
+<<<<<<< HEAD
 #                   [ COMPILE_OPTIONS -Wflag ... ]
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #                   [ DEFINITIONS FOO=bar ... ])
 #
 # The plugin name can be specified with NAME, otherwise is inferred from the

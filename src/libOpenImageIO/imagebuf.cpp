@@ -1565,8 +1565,12 @@ ImageBuf::write(ImageOutput* out, ProgressCallback progress_callback,
             imagesize_t slsize = bufspec.scanline_bytes();
             int chunk = clamp(round_to_multiple(int(budget / slsize), 64), 1,
                               1024);
+<<<<<<< HEAD
             std::unique_ptr<std::byte[]> tmp(new std::byte[chunk * slsize]);
             auto tmpspan = make_span(tmp.get(), chunk * slsize);
+=======
+            std::unique_ptr<char[]> tmp(new char[chunk * slsize]);
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
             // Special handling for flipped vertical scanline order. Right now, OpenEXR
             // is the only format that allows it, so we special case it by name. For

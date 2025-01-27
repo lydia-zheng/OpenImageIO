@@ -20,7 +20,10 @@
 #   fancy_add_executable ([ NAME targetname ... ]
 #                         [ SRC source1 ... ]
 #                         [ INCLUDE_DIRS include_dir1 ... ]
+<<<<<<< HEAD
 #                         [ SYSTEM_INCLUDE_DIRS include_dir1 ... ]
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #                         [ DEFINITIONS FOO=bar ... ])
 #                         [ COMPILE_OPTIONS -Wno-foo ... ]
 #                         [ LINK_LIBRARIES external_lib1 ... ]
@@ -50,8 +53,14 @@ macro (fancy_add_executable)
                                         ${_target_DEFINITIONS})
         target_compile_options (${_target_NAME} PRIVATE
                                     ${_target_COMPILE_OPTIONS})
+<<<<<<< HEAD
         target_link_libraries (${_target_NAME} PRIVATE ${_target_LINK_LIBRARIES})
         target_link_libraries (${_target_NAME} PRIVATE ${PROFILER_LIBRARIES})
+=======
+        if (_target_LINK_LIBRARIES)
+            target_link_libraries (${_target_NAME} PRIVATE ${_target_LINK_LIBRARIES})
+        endif ()
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         set_target_properties (${_target_NAME} PROPERTIES FOLDER ${_target_FOLDER})
         if (SKBUILD)
             # The installed bin and lib directories are at the same level, so we

@@ -27,13 +27,21 @@ exif.png             :   64 x   64, 3 channel, uint8 png
     SHA-1: 7CB41FEA50720B48BE0C145E1473982B23E9AB77
     channel list: R, G, B
     oiio:ColorSpace: "sRGB"
+<<<<<<< HEAD
 alphagamma:
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
    1 x    1, 4 channel, float png
     channel list: R, G, B, A
     ResolutionUnit: "inch"
     Software: "OpenImageIO 2.4.1.1dev : oiiotool -no-autopremult SLEEP_MM.png -cut 1x1+227+1211 -o kaka.png"
+<<<<<<< HEAD
     XResolution: 300
     YResolution: 300
+=======
+    XResolution: 299.999
+    YResolution: 299.999
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     Exif:ImageHistory: "oiiotool -no-autopremult SLEEP_MM.png -cut 1x1+227+1211 -o kaka.png"
     oiio:ColorSpace: "Gamma2.2"
     oiio:Gamma: 2.2
@@ -47,6 +55,7 @@ alphagamma:
     Constant: Yes
     Constant Color: 186.00 186.00 186.00 127.00 (of 255)
     Monochrome: No
+<<<<<<< HEAD
 gimp_gradient:
  256 x  256, 4 channel, float png
     channel list: R, G, B, A
@@ -84,6 +93,8 @@ gimp_gradient:
     Stats FiniteCount: 65536 65536 65536 65536 
     Constant: No
     Monochrome: No
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 smallalpha.png       :    1 x    1, 4 channel, uint8 png
     Pixel (0, 0): 240 108 119 1 (0.94117653 0.42352945 0.4666667 0.003921569)
 Comparing "test16.png" and "ref/test16.png"

@@ -48,6 +48,7 @@ echo "---------------"
 # vcpkg update
 # 
 
+<<<<<<< HEAD
 #vcpkg install libdeflate:x64-windows-release
 #vcpkg install zlib:x64-windows-release
 vcpkg install tiff:x64-windows-release
@@ -56,6 +57,22 @@ vcpkg install tiff:x64-windows-release
 vcpkg install freetype:x64-windows-release
 # # vcpkg install openexr:x64-windows-release
 vcpkg install libjpeg-turbo:x64-windows-release
+=======
+time vcpkg install boost-container:x64-windows
+time vcpkg install boost-filesystem:x64-windows
+time vcpkg install boost-math:x64-windows
+time vcpkg install boost-system:x64-windows
+time vcpkg install boost-thread:x64-windows
+
+#vcpkg install libdeflate:x64-windows
+#vcpkg install zlib:x64-windows
+vcpkg install tiff:x64-windows
+# vcpkg install libpng:x64-windows
+# vcpkg install giflib:x64-windows
+vcpkg install freetype:x64-windows
+# # vcpkg install openexr:x64-windows
+vcpkg install libjpeg-turbo:x64-windows
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 # 
 # vcpkg install libraw:x64-windows-release
 # vcpkg install openjpeg:x64-windows-release

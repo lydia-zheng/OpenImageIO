@@ -68,7 +68,10 @@ private:
     }
 
     bool save_image(const void* data);
+<<<<<<< HEAD
     bool save_metadata(ImageSpec& m_spec, JxlEncoderPtr& m_encoder);
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 };
 
 
@@ -368,6 +371,7 @@ JxlOutput::write_tiles(int xbegin, int xend, int ybegin, int yend, int zbegin,
 
 
 bool
+<<<<<<< HEAD
 JxlOutput::save_metadata(ImageSpec& m_spec, JxlEncoderPtr& encoder)
 {
     DBG std::cout << "JxlOutput::save_metadata()\n";
@@ -475,6 +479,8 @@ JxlOutput::save_metadata(ImageSpec& m_spec, JxlEncoderPtr& encoder)
 
 
 bool
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 JxlOutput::save_image(const void* data)
 {
     JxlEncoderStatus status;

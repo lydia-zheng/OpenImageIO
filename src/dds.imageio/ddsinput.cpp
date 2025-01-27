@@ -845,7 +845,11 @@ DDSInput::seek_subimage(int subimage, int miplevel)
     // linear color space for HDR-ish images
     if (colorspace == nullptr
         && (basetype == TypeDesc::HALF || basetype == TypeDesc::FLOAT))
+<<<<<<< HEAD
         colorspace = "lin_rec709";
+=======
+        colorspace = "linear";
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
     m_spec.set_colorspace(colorspace);
 

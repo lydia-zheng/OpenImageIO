@@ -19,6 +19,7 @@
 #    define FMT_EXCEPTIONS 0
 #endif
 
+<<<<<<< HEAD
 OIIO_NAMESPACE_BEGIN
 namespace pvt {
 OIIO_UTIL_API void
@@ -31,6 +32,15 @@ OIIO_NAMESPACE_END
 // Hopefully this will help us track it down.
 #if !defined(FMT_THROW) && !FMT_EXCEPTIONS
 #    define FMT_THROW(x) OIIO::pvt::log_fmt_error((x).what())
+=======
+// Redefining FMT_THROW to something benign seems to avoid some UB or possibly
+// gcc 11+ compiler bug triggered by the definition of FMT_THROW in fmt 10.1+
+// when FMT_EXCEPTIONS=0, which results in mangling SIMD math. This nugget
+// below works around the problems for hard to understand reasons.
+#if !defined(FMT_THROW) && !FMT_EXCEPTIONS && OIIO_GNUC_VERSION >= 110000
+#    define FMT_THROW(x) \
+        OIIO_ASSERT_MSG(0, "fmt exception: %s", (x).what()), std::terminate()
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #endif
 
 // Use the grisu fast floating point formatting for old fmt versions
@@ -67,12 +77,15 @@ OIIO_PRAGMA_WARNING_PUSH
 #if OIIO_CLANG_VERSION >= 180000
 #    pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #endif
+<<<<<<< HEAD
 #if OIIO_CLANG_VERSION || OIIO_APPLE_CLANG_VERSION
 #    pragma clang diagnostic ignored "-Winvalid-noreturn"
 #endif
 // #if OIIO_GNUC_VERSION
 // #    pragma gcc diagnostic ignored "-Winvalid-noreturn"
 // #endif
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 #include <OpenImageIO/detail/fmt/format.h>
 #include <OpenImageIO/detail/fmt/ostream.h>

@@ -1263,8 +1263,13 @@ control aspects of the writing itself:
    :header-rows: 1
 
    * - Output Configuration Attribute
+<<<<<<< HEAD
      - Type
      - JPEG XL header data or explanation
+=======
+	 - Type
+	 - JPEG XL header data or explanation
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
    * - ``oiio:dither``
      - int
      - If nonzero and outputting UINT8 values in the file from a source of
@@ -1281,19 +1286,32 @@ control aspects of the writing itself:
        for output rather than being assumed to be associated and get automatic
        un-association to store in the file.
    * - ``compression``
+<<<<<<< HEAD
      - string
      - If supplied, must be ``"jpegxl"``, but may optionally have a quality
        value appended, like ``"jpegxl:90"``. Quality can be 0-100, with 100
        meaning lossless.
    * - ``jpegxl:distance``
      - float
+=======
+	 - string
+	 - If supplied, must be ``"jpegxl"``, but may optionally have a quality
+	   value appended, like ``"jpegxl:90"``. Quality can be 0-100, with 100
+	   meaning lossless.
+   * - ``jpegxl:distance``
+	 - float
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
      - Target visual distance in JND units, lower = higher quality.
        0.0 = mathematically lossless. 1.0 = visually lossless.
        Recommended range: 0.5 .. 3.0. Allowed range: 0.0 ... 25.0. 
        Mutually exclusive with ``*compression jpegxl:*```.
    * - ``jpegxl:effort``
      - int
+<<<<<<< HEAD
      - Encoder effort setting. Range: 1 .. 10.
+=======
+	 - Encoder effort setting. Range: 1 .. 10.
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
        Default: 7. Higher numbers allow more computation at the expense of time.
        For lossless, generally it will produce smaller files.
        For lossy, higher effort should more accurately reach the target quality.
@@ -1310,6 +1328,7 @@ control aspects of the writing itself:
        sensor noise. Higher number = grainier image, e.g. 100 gives a low
        amount of noise, 3200 gives a lot of noise. Default is 0.
        Encoded as metadata in the image.
+<<<<<<< HEAD
    * - ``jpegxl:use_boxes``
      - int (bool)
      - If nonzero, will enable metadata (Exif, XMP, jumb, iptc) writing to the
@@ -1335,6 +1354,10 @@ control aspects of the writing itself:
        Default is 0.
        (Does not work as expected at this moment. Box is written but content
        unreadable in exif readers.)
+=======
+
+|
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 .. _sec-bundledplugins-ffmpeg:
 
@@ -1926,12 +1949,21 @@ attributes are supported:
      - int
      - If nonzero, the PNM file is big-endian (the default is little-endian).  
    * - ``pnm:pfmflip``
+<<<<<<< HEAD
      - int
      - If this configuration hint is present and is zero, the automatic
        vertical flipping of PFM image will be disabled (i.e., scanline 0 will
        really be the first one stored in the file). If nonzero (the default),
        float PFM files will store scanline 0 as the last scanline in the file
        (i.e. the visual "top" of the image).
+=======
+      - int
+      - If this configuration hint is present and is zero, the automatic
+      vertical flipping of PFM image will be disabled (i.e., scanline 0 will
+      really be the first one stored in the file). If nonzero (the default),
+      float PFM files will store scanline 0 as the last scanline in the file
+      (i.e. the visual "top" of the image).
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 **Configuration settings for PNM output**
 
@@ -1964,6 +1996,7 @@ control aspects of the writing itself:
        determine whether to write an ASCII or binary file.
        Float PFM files are always written in binary format.
    * - ``pnm:pfmflip``
+<<<<<<< HEAD
      - int
      - If this configuration hint is present and is zero, for PFM files,
        scanline 0 will really be stored first in the file, thus disabling the
@@ -1971,6 +2004,15 @@ control aspects of the writing itself:
        being stored in bottom-to-top order. If nonzero (the default), float
        PFM files will store scanline 0 as the last scanline in the file (i.e.
        the visual "top" of the image).
+=======
+      - int
+      - If this configuration hint is present and is zero, for PFM files,
+      scanline 0 will really be stored first in the file, thus disabling the
+      usual automatically flipping that accounts for PFM files conventionally
+      being stored in bottom-to-top order. If nonzero (the default), float
+      PFM files will store scanline 0 as the last scanline in the file (i.e.
+      the visual "top" of the image).
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 **Custom I/O Overrides**
 

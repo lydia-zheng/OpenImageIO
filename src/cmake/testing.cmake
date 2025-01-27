@@ -268,9 +268,12 @@ macro (oiio_add_all_tests)
     oiio_add_tests (iff
                     ENABLEVAR ENABLE_IFF
                     IMAGEDIR oiio-images URL "Recent checkout of OpenImageIO-images")
+<<<<<<< HEAD
     oiio_add_tests (jpeg-ultrahdr
                     FOUNDVAR libuhdr_FOUND
                     IMAGEDIR oiio-images URL "Recent checkout of OpenImageIO-images")
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     oiio_add_tests (jpeg2000
                     FOUNDVAR OPENJPEG_FOUND
                     IMAGEDIR oiio-images URL "Recent checkout of OpenImageIO-images")

@@ -376,14 +376,22 @@ inside the source code.
     take precedence. If neither is set, the default will be 0, which means
     to use as many threads as there are physical cores on the machine.
 
+<<<<<<< HEAD
 .. cpp:var:: OPENIMAGEIO_METADATA_HISTORY
 
     If set to a nonzero integer value, `oiiotool` and `maketx` will by default
     write the command line into the ImageHistory and Software metadata fields of any
+=======
+``OIIOTOOL_METADATA_HISTORY``
+
+    If set to a nonzero integer value, `oiiotool` will by default write the
+    command line into the ImageHistory and Software metadata fields of any
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     images it outputs. The default if this is not set is to only write the
     name and version of the software and an indecipherable hash of the command
     line, but not the full human-readable command line. (This was added in
     OpenImageIO 2.5.11.)
+<<<<<<< HEAD
 
 .. cpp:var:: OPENIMAGEIO_PYTHON_LOAD_DLLS_FROM_PATH
 
@@ -398,3 +406,5 @@ inside the source code.
 
     In other words, to reproduce the default Python-module-loading behavior of 
     earlier versions of OIIO, set ``OPENIMAGEIO_PYTHON_LOAD_DLLS_FROM_PATH=1``.
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a

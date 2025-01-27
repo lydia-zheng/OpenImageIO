@@ -251,6 +251,7 @@ SoftimageInput::read_next_scanline(void* data)
     // Each scanline is stored using one or more channel packets.
     // We go through each of those to pull the data
     for (auto& cp : m_channel_packets) {
+<<<<<<< HEAD
         bool ok  = false;
         int type = int(cp.type) & 0x3;
         if (type == UNCOMPRESSED) {
@@ -265,6 +266,31 @@ SoftimageInput::read_next_scanline(void* data)
                      int(cp.type), m_filename);
             close();
             return false;
+=======
+        if (cp.type & UNCOMPRESSED) {
+            if (!read_pixels_uncompressed(cp, data)) {
+                errorfmt("Failed to read uncompressed pixel data from \"{}\"",
+                         m_filename);
+                close();
+                return false;
+            }
+        } else if (cp.type & PURE_RUN_LENGTH) {
+            if (!read_pixels_pure_run_length(cp, data)) {
+                errorfmt(
+                    "Failed to read pure run length encoded pixel data from \"{}\"",
+                    m_filename);
+                close();
+                return false;
+            }
+        } else if (cp.type & MIXED_RUN_LENGTH) {
+            if (!read_pixels_mixed_run_length(cp, data)) {
+                errorfmt(
+                    "Failed to read mixed run length encoded pixel data from \"{}\"",
+                    m_filename);
+                close();
+                return false;
+            }
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         }
     }
     return true;

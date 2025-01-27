@@ -239,6 +239,7 @@ Miscellaneous
     concurrent access by multiple threads. Use with caution -- this should
     almost never be needed in ordinary user code.
 
+<<<<<<< HEAD
 
 
 Writing your own image processing functions
@@ -315,6 +316,8 @@ Examples:
                 return true;
             });
 
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 
 Iterators -- the fast way of accessing individual pixels

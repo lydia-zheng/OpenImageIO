@@ -69,7 +69,11 @@ function (setup_oiio_util_library targetname)
                                PRIVATE stdc++_libbacktrace)
     endif ()
 
+<<<<<<< HEAD
     if (OIIO_INTERNALIZE_FMT OR fmt_LOCAL_BUILD)
+=======
+    if (INTERNALIZE_FMT OR OIIO_USING_FMT_LOCAL)
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         add_dependencies(${targetname} fmt_internal_target)
     else ()
         target_link_libraries (${targetname}

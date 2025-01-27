@@ -47,7 +47,10 @@ private:
     int m_color_type;       ///< PNG color model type
     bool m_convert_alpha;   ///< Do we deassociate alpha?
     bool m_need_swap;       ///< Do we need to swap bytes?
+<<<<<<< HEAD
     bool m_linear_premult;  ///< Do premult for sRGB images in linear
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     bool m_srgb   = false;  ///< It's an sRGB image (not gamma)
     float m_gamma = 1.0f;   ///< Gamma to use for alpha conversion
     std::vector<unsigned char> m_scratch;
@@ -58,6 +61,7 @@ private:
     // Initialize private members to pre-opened state
     void init(void)
     {
+<<<<<<< HEAD
         m_png            = NULL;
         m_info           = NULL;
         m_convert_alpha  = true;
@@ -66,6 +70,15 @@ private:
         m_srgb           = false;
         m_err            = false;
         m_gamma          = 1.0;
+=======
+        m_png           = NULL;
+        m_info          = NULL;
+        m_convert_alpha = true;
+        m_need_swap     = false;
+        m_srgb          = false;
+        m_err           = false;
+        m_gamma         = 1.0;
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         m_pngtext.clear();
         ioproxy_clear();
     }
@@ -283,8 +296,25 @@ void
 PNGOutput::deassociateAlpha(T* data, size_t npixels, int channels,
                             int alpha_channel, bool srgb, float gamma)
 {
+<<<<<<< HEAD
     if (srgb && m_linear_premult) {
         // sRGB with request to do unpremult in linear space
+=======
+    if (srgb) {
+        for (size_t x = 0; x < npixels; ++x, data += channels) {
+            DataArrayProxy<T, float> val(data);
+            float alpha = val[alpha_channel];
+            if (alpha != 0.0f && alpha != 1.0f) {
+                for (int c = 0; c < channels; c++) {
+                    if (c != alpha_channel) {
+                        float f = sRGB_to_linear(val[c]);
+                        val[c]  = linear_to_sRGB(f / alpha);
+                    }
+                }
+            }
+        }
+    } else if (gamma == 1) {
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         for (size_t x = 0; x < npixels; ++x, data += channels) {
             DataArrayProxy<T, float> val(data);
             float alpha = val[alpha_channel];

@@ -111,7 +111,11 @@ max_open_files();
 /// Return a string containing a readable stack trace from the point where
 /// it was called. Return an empty string if not supported on this platform
 /// or this build of OpenImageIO.
+<<<<<<< HEAD
 OIIO_UTIL_API std::string
+=======
+OIIO_API std::string
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 stacktrace();
 
 /// Turn on automatic stacktrace dump to the named file if the program
@@ -120,7 +124,11 @@ stacktrace();
 /// be "stdout" or "stderr" to merely print the trace to stdout or stderr,
 /// respectively. If the name is "", it will disable the auto-stacktrace
 /// printing.
+<<<<<<< HEAD
 OIIO_UTIL_API bool
+=======
+OIIO_API bool
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 setup_crash_stacktrace(string_view filename);
 
 /// Try to figure out how many columns wide the terminal window is. May not

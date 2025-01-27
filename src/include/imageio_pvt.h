@@ -68,6 +68,18 @@ OIIO_API const std::string
 font_filename(string_view family, string_view style = "");
 
 
+<<<<<<< HEAD:src/include/imageio_pvt.h
+=======
+// For internal use - use error() below for a nicer interface.
+void append_error(string_view message);
+
+/// Use errorfmt() privately only. Formatting notation is like std::format.
+template<typename... Args>
+inline void errorfmt (const char* fmt, const Args&... args) {
+    append_error(Strutil::fmt::format(fmt, args...));
+}
+
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a:src/libOpenImageIO/imageio_pvt.h.in
 // Make sure all plugins are inventoried. For internal use only.
 void
 catalog_all_plugins(std::string searchpath);

@@ -20,11 +20,19 @@ if [[ "$ASWF_ORG" != ""  ]] ; then
     if [[ "$ASWF_VFXPLATFORM_VERSION" == "2021" || "$ASWF_VFXPLATFORM_VERSION" == "2022" ]] ; then
         # CentOS 7 based containers need the now-nonexistant centos repo to be
         # excluded or all the subsequent yum install commands will fail.
+<<<<<<< HEAD
         yum-config-manager --disable centos-sclo-rh || true
         sed -i 's,^mirrorlist=,#,; s,^#baseurl=http://mirror\.centos\.org/centos/$releasever,baseurl=https://vault.centos.org/7.9.2009,' /etc/yum.repos.d/CentOS-Base.repo
     fi
 
     sudo yum install -y giflib giflib-devel || true
+=======
+        yum-config-manager --disable centos-sclo-rh && true
+        sed -i 's,^mirrorlist=,#,; s,^#baseurl=http://mirror\.centos\.org/centos/$releasever,baseurl=https://vault.centos.org/7.9.2009,' /etc/yum.repos.d/CentOS-Base.repo
+    fi
+
+    sudo yum install -y giflib giflib-devel && true
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     if [[ "${USE_OPENCV}" != "0" ]] ; then
         sudo yum install -y opencv opencv-devel || true
     fi
@@ -112,8 +120,18 @@ else
         time sudo apt-get -q install -y ${EXTRA_DEP_PACKAGES}
     fi
 
+<<<<<<< HEAD
     time sudo apt-get -q install -y python3-numpy
     if [[ "${PIP_INSTALLS}" != "" ]] ; then
+=======
+    # Nonstandard python versions
+    if [[ "${PYTHON_VERSION}" == "3.9" ]] ; then
+        time sudo apt-get -q install -y python3.9-dev python3-numpy
+    elif [[ "$PYTHON_VERSION" == "2.7" ]] ; then
+        time sudo apt-get -q install -y python-dev python-numpy
+    fi
+    if [[ "${PIP_INSTALLS:=numpy}" != "none" ]] ; then
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         time pip3 install ${PIP_INSTALLS}
     fi
 
@@ -127,6 +145,29 @@ else
 
     export CMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu:$CMAKE_PREFIX_PATH
 
+<<<<<<< HEAD
+=======
+    if [[ "$CXX" == "g++-6" ]] ; then
+        time sudo apt-get install -y g++-6
+    elif [[ "$CXX" == "g++-7" ]] ; then
+        time sudo apt-get install -y g++-7
+    elif [[ "$CXX" == "g++-8" ]] ; then
+        time sudo apt-get install -y g++-8
+    elif [[ "$CXX" == "g++-9" ]] ; then
+        time sudo apt-get install -y g++-9
+    elif [[ "$CXX" == "g++-10" ]] ; then
+        time sudo apt-get install -y g++-10
+    elif [[ "$CXX" == "g++-11" ]] ; then
+        time sudo apt-get install -y g++-11
+    elif [[ "$CXX" == "g++-12" ]] ; then
+        time sudo apt-get install -y g++-12
+    elif [[ "$CXX" == "g++-13" ]] ; then
+        time sudo apt-get install -y g++-13
+    elif [[ "$CXX" == "g++-14" ]] ; then
+        time sudo apt-get install -y g++-14
+    fi
+
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     if [[ "$CXX" == "icpc" || "$CC" == "icc" || "$USE_ICC" != "" || "$USE_ICX" != "" ]] ; then
         time sudo apt-get -q install -y wget
         wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB

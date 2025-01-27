@@ -105,12 +105,21 @@ else ()
 endif()
 option (EXTRA_WARNINGS "Enable lots of extra pedantic warnings" OFF)
 if (NOT MSVC)
+<<<<<<< HEAD
     add_compile_options (-Wall -Wformat -Wformat=2)
     if (EXTRA_WARNINGS)
         add_compile_options (-Wextra)
     endif ()
     if (STOP_ON_WARNING)
         add_compile_options (-Werror)
+=======
+    add_compile_options ("-Wall")
+    if (EXTRA_WARNINGS)
+        add_compile_options ("-Wextra")
+    endif ()
+    if (STOP_ON_WARNING)
+        add_compile_options ("-Werror")
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     endif ()
 endif ()
 
@@ -318,7 +327,11 @@ if (NOT USE_SIMD STREQUAL "")
         set (SIMD_COMPILE_FLAGS ${SIMD_COMPILE_FLAGS} "-DOIIO_NO_SIMD=1")
     else ()
         set(_highest_msvc_arch 0)
+<<<<<<< HEAD
         string (REPLACE "," ";" SIMD_FEATURE_LIST "${USE_SIMD}")
+=======
+        string (REPLACE "," ";" SIMD_FEATURE_LIST ${USE_SIMD})
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         foreach (feature ${SIMD_FEATURE_LIST})
             message (VERBOSE "SIMD feature: ${feature}")
             if (MSVC OR CMAKE_COMPILER_IS_INTEL)
@@ -412,6 +425,32 @@ endif ()
 
 
 ###########################################################################
+<<<<<<< HEAD
+=======
+# Check if we need have std::filesystem on this platform.
+#
+cmake_push_check_state ()
+set (CMAKE_REQUIRED_DEFINITIONS ${CSTD_FLAGS})
+check_cxx_source_compiles("#include <filesystem>
+      int main() { std::filesystem::path p; return 0; }"
+      USE_STD_FILESYSTEM)
+if (USE_STD_FILESYSTEM AND GCC_VERSION AND GCC_VERSION VERSION_LESS 9.0)
+    message (STATUS "Excluding USE_STD_FILESYSTEM because gcc is ${GCC_VERSION}")
+    set (USE_STD_FILESYSTEM OFF)
+endif ()
+if (USE_STD_FILESYSTEM)
+    # Note: std::filesystem seems unreliable for gcc until 9
+    message (STATUS "Compiler supports std::filesystem")
+    add_compile_definitions (USE_STD_FILESYSTEM)
+else ()
+    message (STATUS "Using Boost::filesystem")
+    add_compile_definitions (USE_BOOST_FILESYSTEM)
+endif ()
+cmake_pop_check_state ()
+
+
+###########################################################################
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 # Code coverage options
 #
 option (CODECOV "Build code coverage tests" OFF)
@@ -420,6 +459,7 @@ if (CODECOV AND (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_CLANG))
     add_compile_options (-ftest-coverage -fprofile-arcs)
     add_link_options (-ftest-coverage -fprofile-arcs)
     add_compile_definitions (${PROJ_NAME}_CODE_COVERAGE=1)
+<<<<<<< HEAD
 endif ()
 
 
@@ -440,6 +480,8 @@ set_option (${PROJ_NAME}_BUILD_PROFILER "Profile the build process" OFF)
 if (${PROJ_NAME}_BUILD_PROFILER AND CMAKE_COMPILER_IS_CLANG)
     add_compile_options (-ftime-trace)
     message (STATUS "Profiling the build process")
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 endif ()
 
 
@@ -465,6 +507,7 @@ endif ()
 
 
 ###########################################################################
+<<<<<<< HEAD
 # Safety/security hardening options
 #
 # Explanation of levels:
@@ -519,6 +562,27 @@ if (HARDENING GREATER_EQUAL 3)
     # Debugging features that might impact performance significantly
     add_compile_definitions (_GLIBCXX_DEBUG)
     add_compiler_definitions (_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG)
+=======
+# Fortification and hardening options
+#
+# In modern gcc and clang, FORTIFY_SOURCE provides buffer overflow checks
+# (with some compiler-assisted deduction of buffer lengths) for the following
+# functions: memcpy, mempcpy, memmove, memset, strcpy, stpcpy, strncpy,
+# strcat, strncat, sprintf, vsprintf, snprintf, vsnprintf, gets.
+#
+# We try to avoid these unsafe functions anyway, but it's good to have the
+# extra protection, at least as an extra set of checks during CI. Some users
+# may also wish to enable it at some level if they are deploying it in a
+# security-sensitive environment. FORTIFY_SOURCE=3 may have minor performance
+# impact, though FORTIFY_SOURCE=2 should not have a measurable effect on
+# performance versus not doing any fortification. All fortification levels are
+# not available in all compilers.
+
+set (FORTIFY_SOURCE "0" CACHE STRING "Turn on Fortification level (0, 1, 2, 3)")
+if (FORTIFY_SOURCE AND (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_CLANG))
+    message (STATUS "Compiling with _FORTIFY_SOURCE=${FORTIFY_SOURCE}")
+    add_compile_options (-D_FORTIFY_SOURCE=${FORTIFY_SOURCE})
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 endif ()
 
 

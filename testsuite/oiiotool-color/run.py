@@ -96,6 +96,14 @@ command += oiiotool ("--autocc ../common/tahoe-tiny.tif --ociolook \"ACES 1.3 Re
 
 # test various behaviors and misbehaviors related to OCIO configs.
 command += oiiotool ("--nostderr --colorconfig missing.ocio -echo \"Nonexistent config\"", failureok=True)
+<<<<<<< HEAD
+=======
+
+#   What happens when we read an OCIOv2 config? In particular, when building
+#   against OCIOv1, we should at worst have an error message, not crash with
+#   an uncaught exception.
+command += oiiotool ("--nostderr --colorconfig ../common/OpenColorIO/ocio-v2_demo.ocio -echo \"OCIOv2 config Ok\"", failureok=True)
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 
 
 # To add more tests, just append more lines like the above and also add

@@ -26,8 +26,13 @@
 
 using namespace OIIO;
 
+<<<<<<< HEAD
 #ifndef OPENIMAGEIO_METADATA_HISTORY_DEFAULT
 #    define OPENIMAGEIO_METADATA_HISTORY_DEFAULT 0
+=======
+#ifndef OIIOTOOL_METADATA_HISTORY_DEFAULT
+#    define OIIOTOOL_METADATA_HISTORY_DEFAULT 0
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #endif
 
 
@@ -185,12 +190,21 @@ getargs(int argc, char* argv[], ImageSpec& configspec)
     bool cdf                   = false;
     float cdfsigma             = 1.0f / 6;
     int cdfbits                = 8;
+<<<<<<< HEAD
 #if OPENIMAGEIO_METADATA_HISTORY_DEFAULT
     bool metadata_history = Strutil::from_string<int>(
         getenv("OPENIMAGEIO_METADATA_HISTORY", "1"));
 #else
     bool metadata_history = Strutil::from_string<int>(
         getenv("OPENIMAGEIO_METADATA_HISTORY"));
+=======
+#if OIIOTOOL_METADATA_HISTORY_DEFAULT
+    bool metadata_history = Strutil::from_string<int>(
+        getenv("OIIOTOOL_METADATA_HISTORY", "1"));
+#else
+    bool metadata_history = Strutil::from_string<int>(
+        getenv("OIIOTOOL_METADATA_HISTORY"));
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 #endif
     std::string incolorspace;
     std::string outcolorspace;

@@ -1,12 +1,22 @@
+<<<<<<< HEAD
 Reading increasingY-resize.exr
 increasingY-resize.exr : 4080 x 3072, 3 channel, half openexr
     channel list: R, G, B
     compression: "zip"
+=======
+Reading ref/decreasingY-resize.exr
+ref/decreasingY-resize.exr : 4080 x 3072, 3 channel, half openexr
+    SHA-1: 34A9F9879CD89E718ABCEE718A779035F6F78666
+    channel list: R, G, B
+    compression: "zip"
+    DateTime: "2013:04:16 10:20:35"
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     Orientation: 1 (normal)
     PixelAspectRatio: 1
     ResolutionUnit: "in"
     screenWindowCenter: 0, 0
     screenWindowWidth: 1
+<<<<<<< HEAD
     XResolution: 72
     YResolution: 72
     oiio:ColorSpace: "lin_rec709"
@@ -15,11 +25,26 @@ Reading increasingY-copy.exr
 increasingY-copy.exr : 4080 x 3072, 3 channel, half openexr
     channel list: R, G, B
     compression: "zip"
+=======
+    Software: "OpenImageIO 2.6.2.0dev : oiiotool ../common/tahoe-tiny.tif --resize 4080x3072 -o ref/decreasingY-resize.exr"
+    XResolution: 72
+    YResolution: 72
+    Exif:ImageHistory: "oiiotool ../common/tahoe-tiny.tif --resize 4080x3072 -o ref/decreasingY-resize.exr"
+    oiio:ColorSpace: "Linear"
+    oiio:subimages: 1
+Reading ref/decreasingY-copy.exr
+ref/decreasingY-copy.exr : 4080 x 3072, 3 channel, half openexr
+    SHA-1: 34A9F9879CD89E718ABCEE718A779035F6F78666
+    channel list: R, G, B
+    compression: "zip"
+    DateTime: "2013:04:16 10:20:35"
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     Orientation: 1 (normal)
     PixelAspectRatio: 1
     ResolutionUnit: "in"
     screenWindowCenter: 0, 0
     screenWindowWidth: 1
+<<<<<<< HEAD
     XResolution: 72
     YResolution: 72
     oiio:ColorSpace: "lin_rec709"
@@ -28,11 +53,27 @@ Reading decreasingY-resize.exr
 decreasingY-resize.exr : 4080 x 3072, 3 channel, half openexr
     channel list: R, G, B
     compression: "zip"
+=======
+    Software: "OpenImageIO 2.6.2.0dev : oiiotool ref/decreasingY-resize.exr -o ref/decreasingY-copy.exr"
+    XResolution: 72
+    YResolution: 72
+    Exif:ImageHistory: "oiiotool ../common/tahoe-tiny.tif --resize 4080x3072 -o ref/decreasingY-resize.exr
+oiiotool ref/decreasingY-resize.exr -o ref/decreasingY-copy.exr"
+    oiio:ColorSpace: "Linear"
+    oiio:subimages: 1
+Reading decreasingY-resize.exr
+decreasingY-resize.exr : 4080 x 3072, 3 channel, half openexr
+    SHA-1: 34A9F9879CD89E718ABCEE718A779035F6F78666
+    channel list: R, G, B
+    compression: "zip"
+    DateTime: "2013:04:16 10:20:35"
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     Orientation: 1 (normal)
     PixelAspectRatio: 1
     ResolutionUnit: "in"
     screenWindowCenter: 0, 0
     screenWindowWidth: 1
+<<<<<<< HEAD
     XResolution: 72
     YResolution: 72
     oiio:ColorSpace: "lin_rec709"
@@ -41,11 +82,26 @@ Reading decreasingY-copy.exr
 decreasingY-copy.exr : 4080 x 3072, 3 channel, half openexr
     channel list: R, G, B
     compression: "zip"
+=======
+    Software: "OpenImageIO 2.6.2.0dev : oiiotool ../common/tahoe-tiny.tif --resize 4080x3072 --attrib openexr:lineOrder decreasingY -o decreasingY-resize.exr"
+    XResolution: 72
+    YResolution: 72
+    Exif:ImageHistory: "oiiotool ../common/tahoe-tiny.tif --resize 4080x3072 --attrib openexr:lineOrder decreasingY -o decreasingY-resize.exr"
+    oiio:ColorSpace: "Linear"
+    oiio:subimages: 1
+Reading decreasingY-copy.exr
+decreasingY-copy.exr : 4080 x 3072, 3 channel, half openexr
+    SHA-1: 34A9F9879CD89E718ABCEE718A779035F6F78666
+    channel list: R, G, B
+    compression: "zip"
+    DateTime: "2013:04:16 10:20:35"
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     Orientation: 1 (normal)
     PixelAspectRatio: 1
     ResolutionUnit: "in"
     screenWindowCenter: 0, 0
     screenWindowWidth: 1
+<<<<<<< HEAD
     XResolution: 72
     YResolution: 72
     oiio:ColorSpace: "lin_rec709"
@@ -53,4 +109,16 @@ decreasingY-copy.exr : 4080 x 3072, 3 channel, half openexr
 Comparing "increasingY-copy.exr" and "decreasingY-copy.exr"
 PASS
 Comparing "increasingY-resize.exr" and "decreasingY-resize.exr"
+=======
+    Software: "OpenImageIO 2.6.2.0dev : oiiotool ref/decreasingY-resize.exr --attrib openexr:lineOrder decreasingY -o decreasingY-copy.exr"
+    XResolution: 72
+    YResolution: 72
+    Exif:ImageHistory: "oiiotool ../common/tahoe-tiny.tif --resize 4080x3072 -o ref/decreasingY-resize.exr
+oiiotool ref/decreasingY-resize.exr --attrib openexr:lineOrder decreasingY -o decreasingY-copy.exr"
+    oiio:ColorSpace: "Linear"
+    oiio:subimages: 1
+Comparing "decreasingY-resize.exr" and "ref/decreasingY-resize.exr"
+PASS
+Comparing "decreasingY-copy.exr" and "ref/decreasingY-copy.exr"
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 PASS

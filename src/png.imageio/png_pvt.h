@@ -602,7 +602,11 @@ write_info(png_structp& sp, png_infop& ip, int& color_type, ImageSpec& spec,
     const ColorConfig& colorconfig = ColorConfig::default_colorconfig();
     string_view colorspace = spec.get_string_attribute("oiio:ColorSpace");
     if (colorconfig.equivalent(colorspace, "scene_linear")
+<<<<<<< HEAD
         || colorconfig.equivalent(colorspace, "lin_rec709")) {
+=======
+        || colorconfig.equivalent(colorspace, "linear")) {
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         if (setjmp(png_jmpbuf(sp)))  // NOLINT(cert-err52-cpp)
             return "Could not set PNG gAMA chunk";
         png_set_gAMA(sp, ip, 1.0);
@@ -616,6 +620,7 @@ write_info(png_structp& sp, png_infop& ip, int& color_type, ImageSpec& spec,
             return "Could not set PNG gAMA chunk";
         png_set_gAMA(sp, ip, 1.0f / gamma);
         srgb = false;
+<<<<<<< HEAD
     } else if (colorconfig.equivalent(colorspace, "g22_rec709")) {
         gamma = 2.2f;
         if (setjmp(png_jmpbuf(sp)))  // NOLINT(cert-err52-cpp)
@@ -628,6 +633,8 @@ write_info(png_structp& sp, png_infop& ip, int& color_type, ImageSpec& spec,
             return "Could not set PNG gAMA chunk";
         png_set_gAMA(sp, ip, 1.0f / gamma);
         srgb = false;
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     } else if (colorconfig.equivalent(colorspace, "sRGB")) {
         if (setjmp(png_jmpbuf(sp)))  // NOLINT(cert-err52-cpp)
             return "Could not set PNG gAMA and cHRM chunk";

@@ -114,7 +114,15 @@ declare_imagecache(py::module& m)
         .def("resolve_filename",
              [](ImageCacheWrap& ic, const std::string& filename) {
                  py::gil_scoped_release gil;
+<<<<<<< HEAD
                  return ic.m_cache->resolve_filename(filename);
+=======
+#if PY_MAJOR_VERSION >= 3
+                 return ic.m_cache->resolve_filename(filename);
+#else
+                 return PY_STR(ic.m_cache->resolve_filename(filename));
+#endif
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
              })
         // .def("get_image_info", &ImageCacheWrap::get_image_info)
         .def(
@@ -153,14 +161,30 @@ declare_imagecache(py::module& m)
         .def(
             "geterror",
             [](ImageCacheWrap& self, bool clear) {
+<<<<<<< HEAD
                 return self.m_cache->geterror(clear);
+=======
+#if PY_MAJOR_VERSION >= 3
+                return self.m_cache->geterror(clear);
+#else
+                return PY_STR(self.m_cache->geterror(clear));
+#endif
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             },
             "clear"_a = true)
         .def(
             "getstats",
             [](ImageCacheWrap& ic, int level) {
                 py::gil_scoped_release gil;
+<<<<<<< HEAD
                 return ic.m_cache->getstats(level);
+=======
+#if PY_MAJOR_VERSION >= 3
+                return ic.m_cache->getstats(level);
+#else
+                return PY_STR(ic.m_cache->getstats(level));
+#endif
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             },
             "level"_a = 1)
         .def(

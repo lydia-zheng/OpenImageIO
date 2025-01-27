@@ -45,7 +45,10 @@ private:
     Imath::Color3f m_bg;               ///< Background color
     int m_next_scanline;
     bool m_keep_unassociated_alpha;  ///< Do not convert unassociated alpha
+<<<<<<< HEAD
     bool m_linear_premult;           ///< Do premult for sRGB images in linear
+=======
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
     bool m_srgb   = false;           ///< It's an sRGB image (not gamma)
     bool m_err    = false;
     float m_gamma = 1.0f;
@@ -61,10 +64,16 @@ private:
         m_buf.clear();
         m_next_scanline           = 0;
         m_keep_unassociated_alpha = false;
+<<<<<<< HEAD
         m_linear_premult = OIIO::get_int_attribute("png:linear_premult");
         m_srgb           = false;
         m_err            = false;
         m_gamma          = 1.0;
+=======
+        m_srgb                    = false;
+        m_err                     = false;
+        m_gamma                   = 1.0;
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         m_config.reset();
         ioproxy_clear();
     }
@@ -90,8 +99,13 @@ private:
     }
 
     template<class T>
+<<<<<<< HEAD
     void associateAlpha(T* data, int size, int channels, int alpha_channel,
                         bool srgb, float gamma);
+=======
+    static void associateAlpha(T* data, int size, int channels,
+                               int alpha_channel, bool srgb, float gamma);
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
 };
 
 
@@ -234,8 +248,12 @@ PNGInput::associateAlpha(T* data, int size, int channels, int alpha_channel,
 {
     // We need to transform to linear space, associate the alpha, and then
     // transform back.
+<<<<<<< HEAD
     if (srgb && m_linear_premult) {
         // sRGB with request to do premult in linear space
+=======
+    if (srgb) {
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         for (int x = 0; x < size; ++x, data += channels) {
             DataArrayProxy<T, float> val(data);
             float alpha = val[alpha_channel];
@@ -248,15 +266,20 @@ PNGInput::associateAlpha(T* data, int size, int channels, int alpha_channel,
                 }
             }
         }
+<<<<<<< HEAD
     } else if (gamma != 1.0f && m_linear_premult) {
         // Gamma correction with request to do premult in linear space
         float inv_gamma = 1.0f / gamma;
+=======
+    } else if (gamma == 1.0f) {
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         for (int x = 0; x < size; ++x, data += channels) {
             DataArrayProxy<T, float> val(data);
             float alpha = val[alpha_channel];
             if (alpha != 1.0f) {
                 for (int c = 0; c < channels; c++)
                     if (c != alpha_channel)
+<<<<<<< HEAD
                         val[c] = powf((powf(val[c], gamma)) * alpha, inv_gamma);
             }
         }
@@ -264,13 +287,24 @@ PNGInput::associateAlpha(T* data, int size, int channels, int alpha_channel,
         // Do the premult directly on the values. This is correct for the
         // "gamma=1" case, and is also commonly what is needed for many sRGB
         // images (even though it's technically wrong in that case).
+=======
+                        data[c] = data[c] * alpha;
+            }
+        }
+    } else {  // With gamma correction
+        float inv_gamma = 1.0f / gamma;
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
         for (int x = 0; x < size; ++x, data += channels) {
             DataArrayProxy<T, float> val(data);
             float alpha = val[alpha_channel];
             if (alpha != 1.0f) {
                 for (int c = 0; c < channels; c++)
                     if (c != alpha_channel)
+<<<<<<< HEAD
                         val[c] = val[c] * alpha;
+=======
+                        val[c] = powf((powf(val[c], gamma)) * alpha, inv_gamma);
+>>>>>>> fab3dc2a91d1f73bcae55625262a3e100d32586a
             }
         }
     }
